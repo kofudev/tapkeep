@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Workshop · Tapkeep demo</title>
+    <link rel="icon" href="data:," />
+    <style>
+      body {
+        margin: 0;
+        background: #f3f3ee;
+        color: #253d37;
+        font:
+          15px system-ui,
+          sans-serif;
+      }
+      main {
+        max-width: 640px;
+        margin: 70px auto;
+        padding: 30px;
+      }
+      header {
+        font: 12px monospace;
+        letter-spacing: 2px;
+        border-bottom: 1px solid #bccbc0;
+        padding-bottom: 20px;
+      }
+      h1 {
+        font-size: 42px;
+        letter-spacing: -2px;
+        margin: 36px 0 8px;
+      }
+      p {
+        color: #7e9087;
+        line-height: 1.6;
+      }
+      form {
+        margin: 30px 0;
+      }
+      label {
+        display: block;
+        font-size: 12px;
+        font-weight: 700;
+        margin-top: 18px;
+      }
+      input,
+      select {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 12px;
+        margin: 7px 0;
+        border: 1px solid #c0cec4;
+        border-radius: 4px;
+        background: #fff;
+        font: 14px system-ui;
+      }
+      button {
+        padding: 12px 18px;
+        background: #253d37;
+        border: 0;
+        border-radius: 4px;
+        color: #fff;
+        font-weight: 700;
+        margin-top: 15px;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #486e5a;
+      }
+      #bug {
+        background: #d9e5db;
+        color: #253d37;
+      }
+      aside {
+        margin-top: 45px;
+        border-top: 1px solid #bccbc0;
+        padding-top: 20px;
+        font-size: 12px;
+      }
+      aside p {
+        max-width: 570px;
+      }
+      #outcome {
+        font-size: 14px;
+        color: #466751;
+      }
+      li {
+        padding: 5px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>WORKSHOP / TAPKEEP DEMO APP</header>
+      <h1>Create a project</h1>
+      <p>Record this form once. Add “Project created” as a text check. Save flow in Tapkeep Studio.</p>
+      <form id="project-form">
+        <label for="project-name">Project name</label
+        ><input id="project-name" name="project" required placeholder="Weekend build" /><label for="plan"
+          >Plan</label
+        ><select id="plan" name="plan">
+          <option value="personal">Personal</option>
+          <option value="team">Team</option></select
+        ><button type="submit">Create project</button>
+      </form>
+      <div id="outcome" role="status"></div>
+      <h2>Recent projects</h2>
+      <ul id="projects"></ul>
+      <aside>
+        <strong>Try a regression</strong>
+        <p>
+          After saving your flow, click below. Then replay it in Studio. This changes the demo API to return
+          500. Click again to repair.
+        </p>
+        <button id="bug" type="button">Introduce regression</button>
+      </aside>
+    </main>
+    <script>
+      const form = document.getElementById('project-form');
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const response = await fetch('/api/projects', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: document.getElementById('project-name').value,
+            plan: document.getElementById('plan').value,
+          }),
+        });
+        const data = await response.json();
+        document.querySelector('h1').textContent = response.ok ? 'Project created' : 'Something broke';
+        document.getElementById('outcome').textContent = response.ok ? data.name + ' is ready.' : data.error;
+        if (response.ok) {
+          const item = document.createElement('li');
+          item.textContent = data.name + ' · ' + data.plan;
+          document.getElementById('projects').append(item);
+        }
+      });
+      document.getElementById('bug').onclick = async () => {
+        const response = await fetch('/demo-bug', { method: 'POST' });
+        const data = await response.json();
+        document.getElementById('bug').textContent = data.broken
+          ? 'Repair regression'
+          : 'Introduce regression';
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>Tapkeep Studio</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%231d2b31'/%3E%3Cpath d='M16 20h20a12 12 0 0 1 0 24H26' fill='none' stroke='%23f8f5ee' stroke-width='7' stroke-linecap='round'/%3E%3Ccircle cx='20' cy='44' r='5' fill='%23fc684e'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="rail">
+        <div class="brand">
+          <svg viewBox="0 0 64 64" aria-hidden="true">
+            <rect width="64" height="64" rx="15" fill="currentColor" />
+            <path
+              d="M16 20h20a12 12 0 0 1 0 24H26"
+              fill="none"
+              stroke="#f8f5ee"
+              stroke-width="7"
+              stroke-linecap="round"
+            />
+            <circle cx="20" cy="44" r="5" fill="#fc684e" />
+          </svg>
+          <span>tapkeep<small>STUDIO / LOCAL</small></span>
+        </div>
+        <div class="rail-heading"><span>FLOWS</span><span id="flow-count">0</span></div>
+        <nav id="flow-list" class="flow-list" aria-label="Recorded flows"></nav>
+        <div class="rail-foot">
+          <span class="local-dot"></span> Runs on your machine<br /><span id="project-path"></span>
+        </div>
+      </aside>
+
+      <main class="workspace">
+        <header class="toolbar">
+          <div>
+            <div class="eyebrow">WORKSPACE / <span id="workspace-label">YOUR APP</span></div>
+            <h1 id="page-title">Keep working paths working.</h1>
+          </div>
+          <div class="toolbar-actions">
+            <button id="watch-button" class="button button-quiet" type="button" aria-pressed="false">
+              <span class="watch-dot"></span> Watch changes
+            </button>
+            <button id="run-all-button" class="button button-quiet" type="button">
+              Run all <span class="arrow">↗</span>
+            </button>
+            <button id="new-button" class="button button-primary" type="button">+ Record flow</button>
+          </div>
+        </header>
+
+        <div id="notice" class="notice" hidden></div>
+
+        <section id="record-form" class="record-form" hidden>
+          <div class="form-title">
+            <span class="section-index">01 / CAPTURE</span
+            ><button id="form-close" class="text-button" type="button">Close</button>
+          </div>
+          <h2>Record one path through your app.</h2>
+          <p>Click Start, use browser window, then save flow. Tapkeep keeps each action and page state.</p>
+          <form id="start-form">
+            <label
+              >Flow name<input
+                id="flow-name"
+                name="name"
+                maxlength="80"
+                required
+                placeholder="Create a project"
+            /></label>
+            <label>App URL<input id="flow-url" name="url" type="url" required /></label>
+            <button class="button button-primary" type="submit">
+              Start recording <span class="arrow">↗</span>
+            </button>
+          </form>
+        </section>
+
+        <section id="recording-panel" class="recording-panel" hidden>
+          <div class="recording-head">
+            <span class="record-pulse"></span><span class="section-index">RECORDING</span
+            ><span id="recording-name"></span>
+          </div>
+          <h2>Use browser window. Actions appear here.</h2>
+          <p>When important text appears, add check. Replay then verifies it.</p>
+          <form id="text-form">
+            <label for="text-check">Expected visible text</label>
+            <div class="input-row">
+              <input id="text-check" maxlength="180" placeholder="Project created" /><button
+                type="submit"
+                class="button button-quiet"
+              >
+                Add check
+              </button>
+            </div>
+          </form>
+          <div id="live-steps" class="step-list"></div>
+          <div class="recording-actions">
+            <button id="save-button" class="button button-primary" type="button">Save flow</button
+            ><button id="discard-button" class="button button-quiet" type="button">Discard</button>
+          </div>
+        </section>
+
+        <section id="empty-panel" class="empty-panel">
+          <div class="empty-mark">
+            <svg viewBox="0 0 128 128" aria-hidden="true">
+              <path
+                d="M21 37h57c44 0 44 54 0 54H49"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="12"
+                stroke-linecap="round"
+              />
+              <circle cx="37" cy="91" r="9" fill="#fc684e" />
+            </svg>
+          </div>
+          <span class="section-index">NO FLOWS YET</span>
+          <h2>Know when a real user path breaks.</h2>
+          <p>
+            Record clicks once. Tapkeep replays them and stops at first changed page, missing text, browser
+            error, or failed action.
+          </p>
+          <button id="empty-record" class="button button-primary" type="button">
+            Record first flow <span class="arrow">↗</span>
+          </button>
+          <div class="empty-steps">
+            <span>01&nbsp; Record in browser</span><span>02&nbsp; Save what worked</span
+            ><span>03&nbsp; Replay after changes</span>
+          </div>
+        </section>
+
+        <section id="detail-panel" class="detail-panel" hidden>
+          <div class="detail-top">
+            <span class="section-index">FLOW / <span id="detail-id"></span></span
+            ><span id="detail-status" class="status-tag">NOT RUN</span>
+          </div>
+          <div class="detail-title-row">
+            <div>
+              <h2 id="detail-name"></h2>
+              <p id="detail-meta"></p>
+            </div>
+            <div class="detail-actions">
+              <button id="run-one-button" class="button button-primary" type="button">
+                Run flow <span class="arrow">↗</span></button
+              ><button id="delete-button" class="button button-quiet" type="button">Delete</button>
+            </div>
+          </div>
+          <div id="result-banner" class="result-banner" hidden></div>
+          <div class="table-head"><span>STEPS</span><span id="step-count"></span></div>
+          <div id="detail-steps" class="step-list"></div>
+          <div id="error-area" class="error-area" hidden></div>
+        </section>
+        <footer class="workspace-foot">TAPKEEP / 0.1.0 <span>LOCAL ONLY · NO ACCOUNT</span></footer>
+      </main>
+    </div>
+    <div id="image-modal" class="image-modal" hidden>
+      <div class="image-dialog">
+        <div>
+          <span>FAILURE CAPTURE</span
+          ><button id="image-close" class="text-button" type="button">Close</button>
+        </div>
+        <img id="failure-image" alt="Screenshot at failed step" />
+      </div>
+    </div>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+{
+  "name": "tapkeep",
+  "version": "0.1.0",
+  "description": "Record a working path through your web app. Know the first step that breaks.",
+  "type": "module",
+  "bin": {
+    "tapkeep": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "public",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "tsx src/cli.ts",
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node --test tests/*.test.mjs",
+    "check": "npm test",
+    "demo": "npm run build && node scripts/demo.mjs",
+    "smoke": "npm run build && node scripts/package-smoke.mjs",
+    "format": "prettier --write src public tests scripts examples *.json *.md .github/**/*.yml docs/*.md",
+    "format:check": "prettier --check src public tests scripts examples *.json *.md .github/**/*.yml docs/*.md",
+    "start": "node dist/cli.js"
+  },
+  "dependencies": {
+    "chokidar": "4.0.3",
+    "open": "10.2.0",
+    "playwright": "1.63.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.0",
+    "prettier": "3.6.2",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0"
+  },
+  "keywords": [
+    "playwright",
+    "smoke-testing",
+    "record-replay",
+    "regression",
+    "developer-tools"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kofudev/tapkeep.git"
+  }
+}
