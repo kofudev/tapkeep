@@ -170,3 +170,4 @@ test('CLI rejects empty collections, invalid flows and unknown flags', async (t)
     (error) => error.code === 2 && error.stderr.includes('Invalid flow'),
   );
 });
+// Kofu

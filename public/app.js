@@ -286,3 +286,4 @@ await refresh();
 setInterval(() => {
   void refresh();
 }, 1200);
+// Kofu

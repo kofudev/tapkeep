@@ -7,3 +7,4 @@ Recording and replay visit your selected app using Chromium. Replays perform rea
 Sensitive input values become environment references. Other input, page text and URLs can remain in flow JSON; failure captures can contain application data. Review artifacts before sharing them.
 
 Report vulnerabilities privately using the maintainer's GitHub profile. Include affected version and a minimal reproduction without credentials.
+Kofu

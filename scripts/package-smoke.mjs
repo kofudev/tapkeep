@@ -103,3 +103,4 @@ try {
   if (app) await new Promise((resolve) => app.close(resolve));
   await rm(temp, { recursive: true, force: true });
 }
+// Kofu

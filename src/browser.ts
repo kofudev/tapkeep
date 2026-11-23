@@ -116,3 +116,4 @@ export const RECORDER_SCRIPT = `(() => {
     send({ type: 'press', locator: locatorFor(element), label: labelFor(element), value: 'Enter' });
   }, true);
 })();`;
+// Kofu

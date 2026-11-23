@@ -173,3 +173,4 @@ TypeScript backend, plain browser JavaScript/CSS, Playwright execution. See [CON
 Report a concrete recording or replay failure, with a minimal page when possible. Feature contributions should improve this loop and include a test for changed behavior. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 MIT © kofudev
+Kofu

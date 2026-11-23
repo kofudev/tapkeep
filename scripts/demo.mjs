@@ -21,3 +21,4 @@ process.once('SIGINT', () => {
 process.once('SIGTERM', () => {
   void close();
 });
+// Kofu

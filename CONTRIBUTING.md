@@ -24,3 +24,4 @@ Project layout:
 - `tests/`: behavior and browser integration checks
 
 For security issues, contact the maintainer privately through their GitHub profile rather than posting secrets in an issue.
+Kofu

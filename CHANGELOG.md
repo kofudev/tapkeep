@@ -9,3 +9,4 @@
 - Environment references for sensitive fields and replay redaction
 - Pinned browser setup for source and global installs
 - Windows, macOS and Linux CI
+Kofu

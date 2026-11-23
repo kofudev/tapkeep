@@ -148,3 +148,4 @@ export function checkpointDifference(expected: Checkpoint, actual: Checkpoint): 
 export function normalizeText(value: string): string {
   return value.replace(/\s+/g, ' ').trim().slice(0, 180);
 }
+// Kofu

@@ -32,3 +32,4 @@ The logo draws a returning path with a coral endpoint. Studio uses warm paper (`
 ## Next
 
 Editable checkpoints, viewport profiles, reusable setup paths and export to ordinary Playwright tests. Prioritize real recording/replay defects over adding unrelated dashboards.
+Kofu
