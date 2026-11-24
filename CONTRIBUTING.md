@@ -25,3 +25,4 @@ Project layout:
 
 For security issues, contact the maintainer privately through their GitHub profile rather than posting secrets in an issue.
 Kofu
+KOFUDEV
