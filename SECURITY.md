@@ -8,3 +8,4 @@ Sensitive input values become environment references. Other input, page text and
 
 Report vulnerabilities privately using the maintainer's GitHub profile. Include affected version and a minimal reproduction without credentials.
 Kofu
+KOFUDEV
