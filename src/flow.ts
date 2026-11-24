@@ -149,3 +149,4 @@ export function normalizeText(value: string): string {
   return value.replace(/\s+/g, ' ').trim().slice(0, 180);
 }
 // Kofu
+// KOFUDEV
