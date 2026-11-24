@@ -174,3 +174,4 @@ Report a concrete recording or replay failure, with a minimal page when possible
 
 MIT © kofudev
 Kofu
+KOFUDEV
